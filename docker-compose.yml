@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  pomsky:
+    container_name: pomsky-server-dev
+    build:
+      context: .
+    image: "${DOCKER_IMAGE_NAME:-pomsky-server}"
+    user: "${UID:-1000}:${GUID:-1000}"
+    environment:
+      ROCKET_ADDRESS: "0.0.0.0"
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "${PORT:-8000}:8000"
+    command: ["pomsky-server"]
